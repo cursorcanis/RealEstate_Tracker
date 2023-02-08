@@ -1,10 +1,23 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using RealEstate_Tracker.Data;
+using RealEstate_Tracker.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<RealEstate_TrackerContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("RealEstate_TrackerContext") ?? throw new InvalidOperationException("Connection string 'RealEstate_TrackerContext' not found.")));
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    SeedData.Initialize(services);
+}
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
