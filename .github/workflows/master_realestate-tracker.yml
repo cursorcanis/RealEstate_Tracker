@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'realestate-tracker'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_83998029D02749A5B83F3C069A31FE72 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_48575795F83E44AA993614B0B775D85A }}
           package: .
